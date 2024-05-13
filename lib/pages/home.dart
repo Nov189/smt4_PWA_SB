@@ -22,6 +22,7 @@ class DashboardPage extends StatelessWidget {
           children: <Widget>[
             Container(
               decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(9),
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
