@@ -5,6 +5,17 @@ class DashboardPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Dashboard'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.notifications),
+            onPressed: () {
+              // nambah fungsi notif nya
+            },
+          ),
+        ],
+      ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -22,23 +33,26 @@ class DashboardPage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
-                    // child: GestureDetector(
-                    // onTap: () {
-                    //   Navigator.push(context,MaterialPageRoute(builder: (context) => ProfileUserPage()));
-                    // },
-                    // ),
-                    width: 100,
-                    height: 100,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.white,
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ProfileUserPage()));
+                    },
+                    child: Container(
+                      width: 100,
+                      height: 100,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.white,
+                      ),
+                      // child: Icon(
+                      //   Icons.person,
+                      //   size: 50,
+                      //   color: Color.fromARGB(255, 67, 68, 151),
+                      // ),
                     ),
-                    // child: Icon(
-                    //   Icons.person,
-                    //   size: 50,
-                    //   color: Color.fromARGB(255, 67, 68, 151),
-                    // ),
                   ),
                   SizedBox(height: 20.0),
                 ],
@@ -54,15 +68,19 @@ class DashboardPage extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: [
-                  kotakdashboard('tambah yoo', Color.fromARGB(255, 168, 177, 255)),
-                  kotakdashboard('tambah yoo', Color.fromARGB(255, 168, 177, 255)),
-                  kotakdashboard('ini pisan', Color.fromARGB(255, 168, 177, 255)),
-                  kotakdashboard('terus ini', Color.fromARGB(255, 168, 177, 255)),
-                  kotakdashboard('ini juga', Color.fromARGB(255, 168, 177, 255)),
+                  kotakdashboard(
+                      'tambah yoo', Color.fromARGB(255, 168, 177, 255)),
+                  kotakdashboard(
+                      'tambah yoo', Color.fromARGB(255, 168, 177, 255)),
+                  kotakdashboard(
+                      'ini pisan', Color.fromARGB(255, 168, 177, 255)),
+                  kotakdashboard(
+                      'terus ini', Color.fromARGB(255, 168, 177, 255)),
+                  kotakdashboard(
+                      'ini juga', Color.fromARGB(255, 168, 177, 255)),
                 ],
               ),
             ),
-
           ],
         ),
       ),
@@ -89,9 +107,7 @@ class DashboardPage extends StatelessWidget {
     return ListTile(
       leading: Icon(icon),
       title: Text(title),
-      onTap: () {
-        // Add functionality for each dashboard feature
-      },
+      onTap: () {},
     );
   }
 
