@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:smtforflutter/pages/home.dart';
 import 'login.dart';
-import 'package:smtforflutter/network/api.dart'; // Import file api.dart
+// import 'package:smtforflutter/network/api.dart';
 
 class RegisterPage extends StatefulWidget {
   @override
@@ -12,34 +13,31 @@ class _RegisterPageState extends State<RegisterPage> {
   TextEditingController passwordController = TextEditingController();
   TextEditingController usernameController = TextEditingController();
 
-  void _register() async {
-    String email = emailController.text;
-    String password = passwordController.text;
-    String username = usernameController.text;
+  // void _register() async {
+  //   String email = emailController.text;
+  //   String password = passwordController.text;
+  //   String username = usernameController.text;
 
-    final response = await Api.registerUser(
-      username: username,
-      email: email,
-      password: password,
-    );
+  //   final response = await Api.registerUser(
+  //     username: username,
+  //     email: email,
+  //     password: password,
+  //   );
 
-    if (response.statusCode == 200) {
-      // Tampilkan pesan bahwa pendaftaran berhasil
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text('Pendaftaran berhasil'),
-      ));
-      // Navigasi ke halaman login
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => LoginPage()),
-      );
-    } else {
-      // Tampilkan pesan bahwa pendaftaran gagal
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text('Pendaftaran gagal, coba lagi'),
-      ));
-    }
-  }
+  //   if (response.statusCode == 200) {
+  //     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+  //       content: Text('Pendaftaran berhasil'),
+  //     ));
+  //     Navigator.pushReplacement(
+  //       context,
+  //       MaterialPageRoute(builder: (context) => LoginPage()),
+  //     );
+  //   } else {
+  //     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+  //       content: Text('Pendaftaran gagal, coba lagi'),
+  //     ));
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -65,12 +63,17 @@ class _RegisterPageState extends State<RegisterPage> {
             SizedBox(height: 20.0),
             Column(
               children: <Widget>[
-                _buildInputField('Email', emailController),
-                _buildInputField('Password', passwordController),
-                _buildInputField('Username', usernameController),
+                inputText('Email', emailController),
+                inputText('Password', passwordController),
+                inputText('Username', usernameController),
                 SizedBox(height: 20.0),
                 ElevatedButton(
-                  onPressed: _register,
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => DashboardPage()));
+                  },
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30.0),
@@ -111,7 +114,7 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  Widget _buildInputField(String label, TextEditingController controller) {
+  Widget inputText(String label, TextEditingController controller) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
       decoration: BoxDecoration(

@@ -5,7 +5,6 @@ class Api {
   static const String baseUrl = 'http://localhost:8000/api/register';
 
   static Future registerUser({
-    required String name,
     required String username,
     required String email,
     required String password,
