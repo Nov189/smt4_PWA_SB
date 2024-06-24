@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:smtforflutter/pages/booking.dart';
 // import 'package:smtforflutter/pages/settings.dart'; // Import SettingsPage
 import 'package:smtforflutter/pages/profile.dart';
-
+import 'package:smtforflutter/pages/settings.dart';
 class DashboardPage extends StatefulWidget {
   @override
   _DashboardPageState createState() => _DashboardPageState();
@@ -12,9 +12,9 @@ class _DashboardPageState extends State<DashboardPage> {
   int _currentIndex = 0;
 
   final List<Widget> _pages = [
-    DashboardPageContent(), // Halaman utama dashboard
-    BookingPage(), // Halaman booking
-    // SettingsPage(), // Halaman pengaturan
+    DashboardPageContent(), 
+    BookingPage(), 
+    SettingsPage(), 
   ];
 
   @override
@@ -113,20 +113,6 @@ class DashboardPageContent extends StatelessWidget {
             style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
           ),
           SizedBox(height: 20.0),
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: [
-                kotakdashboard(
-                    'tambah yoo', Color.fromARGB(255, 168, 177, 255)),
-                kotakdashboard(
-                    'tambah yoo', Color.fromARGB(255, 168, 177, 255)),
-                kotakdashboard('ini pisan', Color.fromARGB(255, 168, 177, 255)),
-                kotakdashboard('terus ini', Color.fromARGB(255, 168, 177, 255)),
-                kotakdashboard('ini juga', Color.fromARGB(255, 168, 177, 255)),
-              ],
-            ),
-          ),
         ],
       ),
     );

@@ -22,9 +22,7 @@ class _LoginPageState extends State<LoginPage>
     super.initState();
     _animationController = AnimationController(
       vsync: this,
-      duration: Duration(
-          milliseconds:
-              800), // Mengubah durasi animasi menjadi 800 milliseconds
+      duration: Duration(milliseconds: 800),
     );
     _animation = Tween<double>(
       begin: -1.0,
@@ -45,11 +43,12 @@ class _LoginPageState extends State<LoginPage>
   }
 
   Future<void> _login() async {
-    String email = emailController.text;
-    String password = passwordController.text;
+  String email = emailController.text;
+  String password = passwordController.text;
 
-    var url = Uri.parse('http://127.0.0.1:8000/api/loginpelanggan');
+  var url = Uri.parse('http://127.0.0.1:8000/api/loginpelanggan');
 
+  try {
     var response = await http.post(
       url,
       headers: {
@@ -61,28 +60,33 @@ class _LoginPageState extends State<LoginPage>
       }),
     );
 
-    if (response.statusCode == 200) {
-      var responseData = jsonDecode(response.body);
-      String accessToken = responseData['access_token'];
-      String username = responseData['username']; // Ambil username
+      if (response.statusCode == 200) {
+        var responseData = jsonDecode(response.body);
+        String accessToken = responseData['access_token'];
 
-      // Simpan access_token dan username dalam SharedPreferences
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      await prefs.setString('access_token', accessToken);
-      await prefs.setString('username', username);
+        // Simpan access_token dan email dalam SharedPreferences
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        await prefs.setString('accessToken', accessToken);
+        await prefs.setString('email', email);
 
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text('Login berhasil'),
+        ));
+
+        // Navigasi ke halaman dashboard
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => DashboardPage()),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text('Login gagal, coba lagi. Status code: ${response.statusCode}'),
+        ));
+      }
+    } catch (e) {
+      print("Error during login: $e");
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text('Login berhasil'),
-      ));
-
-      // Navigasi ke halaman dashboard
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => DashboardPage()),
-      );
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text('Login gagal, coba lagi'),
+        content: Text('Terjadi kesalahan: $e'),
       ));
     }
   }
@@ -209,12 +213,12 @@ class _LoginPageState extends State<LoginPage>
         obscureText: isPassword,
         decoration: InputDecoration(
           hintText: label,
-          hintStyle: TextStyle(color: Colors.lightBlueAccent),
+          hintStyle: TextStyle(color: Colors.amberAccent),
           border: InputBorder.none,
           contentPadding: EdgeInsets.symmetric(horizontal: 20.0),
         ),
         textAlign: TextAlign.left,
-        style: TextStyle(color: Colors.lightBlueAccent),
+        style: TextStyle(color: Colors.amberAccent),
       ),
     );
   }
